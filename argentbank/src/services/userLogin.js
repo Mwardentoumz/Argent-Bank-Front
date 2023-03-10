@@ -20,6 +20,13 @@ export async function userLogin(credentials){
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             else delete axios.defaults.headers.common['Authorization'];
             resolve(response.data);
+
+            if (response.status === 400){
+                alert('Email ou mot de passe incorrect')
+            }
+            if (!response.ok){
+                alert('Erreur de serveur, veuillza réessayer plus tard')
+            }
         } catch (error) {
             reject(error);
       }
