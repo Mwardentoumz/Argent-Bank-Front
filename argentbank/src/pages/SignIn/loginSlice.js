@@ -15,7 +15,7 @@ const loginSlice = createSlice({
             state.isLoading = true;
         },
         loginSuccess: (state) => {
-            state.isLoading = true;
+            state.isLoading = false;
             state.error = null;
             state.isAuth = true;
         },

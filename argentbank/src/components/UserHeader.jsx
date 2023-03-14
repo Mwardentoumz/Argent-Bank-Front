@@ -9,6 +9,8 @@ import {
 
 import { userUpdate } from '../services/userUpdate';
 
+import '../styles/UserHeader.css';
+
 
 /**
  * @ returns {JSX.Element} JSX.Element handling the user page

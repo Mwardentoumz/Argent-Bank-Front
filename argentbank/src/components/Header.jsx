@@ -1,6 +1,7 @@
 
 import logo from "../assets/argentBankLogo.png"
 import { Link } from "react-router-dom"
+import LogInOut from "./LogInOut"
 
 export default function Header() {
     return (
@@ -10,9 +11,7 @@ export default function Header() {
                     <img src={logo} className="main-nav-logo-image" alt="logo"></img>
                     <h1 className="sr-only">Argent Bank</h1>
                 </a>
-                <div>
-                    <Link className="main-nav-item" relative="path" to='/SignIn'><i className='fa fa-user-circle'></i>Sign In</Link>
-                </div>
+                <LogInOut/>
             </nav>
         </>
     )
