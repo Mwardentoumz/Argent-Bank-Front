@@ -48,7 +48,6 @@ export default function SignIn() {
             const isUserAuthenticated = await userLogin(credentials);
             if (isRemember){
                 localStorage.setItem('token', isUserAuthenticated.body.token);
-                
             } else {
                 localStorage.removeItem('token');
             }
