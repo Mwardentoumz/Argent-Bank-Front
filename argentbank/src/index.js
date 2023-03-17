@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App.jsx';
+import NotFound from './pages/404/404';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SignIn from './pages/SignIn/SignIn';
@@ -17,7 +18,7 @@ root.render(
         <Route path="/" element={<App />} />
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/User" element={<User />} />
-        {/* <Route path='/*' element={<404/>}/> */}
+        <Route path='/*' element={<NotFound/>}/>
 
       </Routes>
     </BrowserRouter>
