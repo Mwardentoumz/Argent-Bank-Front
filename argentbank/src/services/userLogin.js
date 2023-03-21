@@ -14,7 +14,6 @@ export async function userLogin(credentials){
     return new Promise(async (resolve, reject) => {
         try {
             const response = await axios.post(URL_LOGIN, credentials);
-            console.log(response)
             const token = response.data.body.token;
             if (token) 
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -24,9 +23,7 @@ export async function userLogin(credentials){
             if (response.status === 400){
                 alert('Email ou mot de passe incorrect')
             }
-            if (!response.ok){
-                alert('Erreur de serveur, veuillza réessayer plus tard')
-            }
+            
         } catch (error) {
             reject(error);
       }

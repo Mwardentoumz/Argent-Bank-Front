@@ -37,7 +37,33 @@ export default function SignIn() {
         setCredentials({
             ...credentials,
             [name]:value,
+            
         })
+        console.log(credentials)
+    }
+
+    function valueMail() {
+        if (localStorage.getItem('mail') !== null) {
+            return localStorage.getItem('mail');
+        }
+    }
+
+    function valuePassword() {
+        if (localStorage.getItem('password') !== null) {
+            return localStorage.getItem('password');
+        }
+    }
+
+
+    if (isRemember) {
+        try {
+            userLogin(credentials);
+            dispatch(loginSuccess());
+            navigate('/user');
+        } catch (error) {
+            console.log(error);
+            dispatch(loginFailed(error.response.data.message));
+        }
     }
 
     async function handleSubmit(e){
@@ -46,9 +72,14 @@ export default function SignIn() {
         dispatch(loginPending());
         try {
             const isUserAuthenticated = await userLogin(credentials);
+            console.log(isUserAuthenticated)
             if (isRemember){
                 localStorage.setItem('token', isUserAuthenticated.body.token);
+                localStorage.setItem('mail', credentials.email);
+                localStorage.setItem('password', credentials.password)
             } else {
+                localStorage.removeItem('mail');
+                localStorage.removeItem('password');
                 localStorage.removeItem('token');
             }
 

@@ -13,6 +13,9 @@ export default function LogInOut() {
 
     const handleClick = () => {
         dispatch(logOut());
+        localStorage.removeItem('token');
+        localStorage.removeItem('mail');
+        localStorage.removeItem('password');
     }
 
     console.log(isAuth)
