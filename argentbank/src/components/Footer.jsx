@@ -1,22 +1,44 @@
-import styled from "styled-components"
+// IMPORTS // ______________________________________________________________
+
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
+// actions imports
+import { toggleTheme } from '../actions/actionTheme'
+// styles imports
+import { FooterStyle, Button, Copyright } from '../styles/components/footer'
+
+// JSX // _________________________________________________________________
+
+/**
+ * Footer component to display website's footer
+ * @name Footer
+ * @returns {?JSX}
+ */
 
 export default function Footer() {
-    return (
-        <>
-            <Wrapper>
-                <Paragraph>Copyright 2020 Argent Bank</Paragraph>
-            </Wrapper>
-        </>
-            )
+  const selectTheme = (state) => state.theme
+  const theme = useSelector(selectTheme)
+  const dispatch = useDispatch()
+  return (
+    <FooterStyle theme={theme}>
+      <Copyright theme={theme}>Copyright 2020 Argent Bank</Copyright>
+      <div onClick={() => dispatch(toggleTheme())}>
+        {theme === 'light' ? (
+          <Button theme={theme}>Dark</Button>
+        ) : (
+          <Button theme={theme}>Light</Button>
+        )}
+      </div>
+    </FooterStyle>
+  )
 }
 
-const Wrapper = styled.footer`
-display: flex;
-    justify-content: center;
-    border-top: 2px solid #ccc;
-    padding: 2rem 0 1.5rem;`
+// PROPTYPES // ___________________________________________________________
 
-const Paragraph = styled.p`
-margin: 0;
-padding: 0;
-`
+FooterStyle.propTypes = {
+  theme: PropTypes.string.isRequired
+}
+
+// EXPORT // ______________________________________________________________
+
