@@ -1,95 +1,48 @@
-// IMPORTS // ______________________________________________________________
+import ArgentBankLogo from '../assets/argentBankLogo.png';
+import { Link } from 'react-router-dom';
+import { selectUserLogin, selectFirstName } from '../utils/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logOut } from '../utils/reducers';
 
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import PropTypes from 'prop-types'
-// actions imports
-import { logOut } from '../actions/actionLogout'
-// assets imports
-import logo from '../assets/argentBankLogo.png'
-// styles imports
-import {
-  Nav,
-  NavLinkElements,
-  Logo,
-  HeaderStyle,
-  NavLinksWrapper,
-  Icon,
-  Paragraph,
-} from '../styles/components/header'
+import { FiLogOut } from "react-icons/fi";
+import {BiUserCircle} from "react-icons/bi";
 
-// JSX // _________________________________________________________________
+function Header() {
+    const connected = useSelector(selectUserLogin);
+    const firstName = useSelector(selectFirstName);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-/**
- * to log out and unstock token
- * @function
- * @name logout
- * @returns {object}
- */
- export const logout = () => {
-  localStorage.removeItem('token')
-  return (dispatch) => {
-    dispatch(logOut())
-  }
+    let handleLogOut = () => {
+        dispatch(logOut());
+        navigate('/');
+    }
+
+    return (
+        <nav className='main-nav'>
+            <Link to='/'>
+                <img src={ArgentBankLogo} alt='Argent Bank Logo' className='main-nav-logo' />
+                <h1 className='sr-only'>Argent Bank</h1>
+            </Link>
+
+            {connected 
+                    ?
+                    <div className='logged-container'>
+                        <BiUserCircle className="icon-sign"/>  
+                        <Link className='main-nav-item' to={"/user"}>{firstName}</Link>
+                        <FiLogOut className="logout-icon"/>
+                        <p className='main-nav-item' onClick={handleLogOut}>Sign out</p> 
+                    </div>
+                    : 
+                    <div className='logged-container'>
+                        <FiLogOut className="icon-sign"/> 
+                        <Link className="main-nav-item" to={"/sign-in"}>
+                        Sign In
+                        </Link>
+                    </div>}
+        </nav>  
+    )
 }
-
-
-/**
- * Header component to display website's header
- * @name Header
- * @returns {?JSX}
- */
-
-const Header = () => {
-  const selectTheme = (state) => state.theme
-  const theme = useSelector(selectTheme)
-
-  const dispatch = useDispatch()
-
-  const selectLogin = (state) => state.getUser.isLogged
-  const login = useSelector(selectLogin)
-
-  const selectUser = (state) => state.getUser.user
-  const user = useSelector(selectUser)
-
-  return (
-    <HeaderStyle>
-      <Nav theme={theme}>
-        <NavLinkElements theme={theme} exact to="/">
-          <h1 className="sr-only">Argent Bank</h1>
-          <Logo src={logo} alt="Argent Bank Logo"></Logo>
-        </NavLinkElements>
-        {!login ? (
-          <NavLinksWrapper>
-            <NavLinkElements theme={theme} exact to="/sign-in">
-              <Icon theme={theme} className="fa fa-user-circle"></Icon>
-              <Paragraph theme={theme}>Sign In</Paragraph>
-            </NavLinkElements>
-          </NavLinksWrapper>
-        ) : (
-          <NavLinksWrapper>
-            <NavLinkElements theme={theme} exact to="/user">
-              <Icon theme={theme} className="fa fa-user-circle"></Icon>
-              <Paragraph theme={theme}>{user.body.firstName}</Paragraph>
-            </NavLinkElements>
-            <NavLinkElements
-              theme={theme}
-              exact
-              to="/"
-              onClick={() => dispatch(logout())}
-            >
-              <Icon theme={theme} className="fa fa-sign-out"></Icon>
-              <Paragraph theme={theme}>Sign Out</Paragraph>
-            </NavLinkElements>
-          </NavLinksWrapper>
-        )}
-      </Nav>
-    </HeaderStyle>
-  )
-}
-
-// PROPTYPES // ___________________________________________________________
-
-
 
 export default Header
