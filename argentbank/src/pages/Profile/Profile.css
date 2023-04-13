@@ -1,0 +1,60 @@
+@import '../../utils/colors.css';
+
+.profile_wrapper {
+   flex: 1;
+   box-sizing: border-box;
+   padding: 2rem;
+   background-color: var(--background-blue-color);
+}
+
+.welcome_wrapper {
+   color: white;
+   margin-bottom: 2rem;
+}
+
+.welcome_text {
+   margin: 0;
+}
+
+.input_name_wrapper {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   margin-top: 0.5rem;
+   margin-bottom: 1.5rem;
+}
+
+.input_name {
+   width: 200px;
+   height: 1.7rem;
+   margin: 0 10px 0 10px;
+   text-indent: 5px;
+   font-size: 18px;
+}
+
+.name_text {
+   margin-top: 0;
+}
+
+.redirection_text {
+   color: white;
+   margin: 2rem;
+}
+
+.redirection_link {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   color: var(--primary-color);
+   text-decoration: none;
+}
+
+.signin_text {
+   margin: 0.8rem;
+   text-decoration: underline;
+}
+
+.redirection_link:hover {
+   color: white;
+}

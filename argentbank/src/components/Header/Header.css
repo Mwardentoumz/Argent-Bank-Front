@@ -1,0 +1,50 @@
+@import '../../utils/colors.css';
+
+.header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 5px 20px;
+}
+
+.header a {
+   font-weight: bold;
+   color: var(--secondary-color);
+}
+
+.header a.router-link-exact-active {
+   color: var(--light-primary-color);
+}
+
+.header_link {
+   display: flex;
+   align-items: center;
+}
+ 
+.header_logo {
+   max-width: 100%;
+   width: 200px;
+}
+
+.nav {
+   display: flex;
+   flex-direction: row;
+}
+
+.nav_item {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   text-decoration: none;
+   margin-left: 0.5rem;
+   margin-right: 0.5rem;
+}
+
+.nav_item:hover {
+   text-decoration: underline;
+}
+
+.nav_item_text {
+   margin: 0;
+   margin-left: 0.3rem;
+}

@@ -1,66 +1,45 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
+import LoginButton from '../../components/LoginButton/LoginButton';
+import './Login.css';
 
-import './Login.css'
-import React from 'react'
-import Header from '../../components/Header.jsx'
-import Footer from '../../components/Footer.jsx'
+/**
+ * React component to create the login page when the user is logged out
+ * @returns { React.ReactElement } Login page
+ */
+function Login() {
+   const hasLoginFailed = useSelector((state) => state.hasLoginFailed);
 
-import chat from '../../assets/icon-chat.png'
-import money from '../../assets/icon-money.png'
-import security from '../../assets/icon-security.png'
-
-
-
-export default function Login() {
-
-    return (
-        <React.Fragment>
-
-            <Header />
-
-            <main>
-                <div className="hero">
-                    <section className='hero-content'>
-                        <h2 className="sr-only">Promoted Content</h2>
-                        <p className="subtitle">No fees.</p>
-                        <p className="subtitle">No minimum deposit.</p>
-                        <p className="subtitle">High interest rates.</p>
-                        <p className="text">Open a savings account with Argent Bank today!</p>
-                    </section>
-                </div>
-
-                <section className="features">
-                    <h2 className="sr-only">Features</h2>
-                    <div className="feature-item">
-                        <img className='feature-icon' src={chat} alt="chat icon"></img>
-                        <h3 className="feature--item-title">You are our #1 priority</h3>
-                        <p>
-                            Need to talk to a representative? You can get in touch through our
-                            24/7 chat or through a phone call in less than 5 minutes.
-                        </p>
-                    </div>
-                    <div className="feature-item">
-                        <img className='feature-icon' src={money} alt="money icon"></img>
-                        <h3 className="feature--item-title">More savings means higher rates</h3>
-                        <p>
-                            The more you save with us, the higher your interest rate will be!
-                        </p>
-                    </div>
-                    <div className="feature-item">
-                        <img className='feature-icon' src={security} alt="chat icon"></img>
-                        <h3 className="feature--item-title">Security you can trust</h3>
-                        <p>
-
-                            We use top of the line encryption to make sure your data and money
-                            is always safe.
-
-                        </p>
-                    </div>
-                    
-                </section>
-            </main>
-
-            <Footer/>
-
-        </React.Fragment>
-    );
+   return (
+      <main className="login_wrapper">
+         <section className="login_content">
+            <i className="fa fa-user-circle login_icon"></i>
+            <h1>Sign In</h1>
+            <form>
+               <div className="input_login_wrapper">
+                  <label htmlFor="email">E-mail</label>
+                  <input type="text" id="email" />
+               </div>
+               <div className="input_login_wrapper">
+                  <label htmlFor="password">Password</label>
+                  <input type="password" id="password" autoComplete="off" />
+               </div>
+               <div className="remember_wrapper">
+                  <input type="checkbox" id="remember" />
+                  <label htmlFor="remember">Remember me</label>
+               </div>
+               {hasLoginFailed ? (
+                  <div className="error_message">
+                     Wrong e-mail or password, please check again.
+                  </div>
+               ) : (
+                  ''
+               )}
+               <LoginButton />
+            </form>
+         </section>
+      </main>
+   );
 }
+
+export default Login;

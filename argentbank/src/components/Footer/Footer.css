@@ -1,0 +1,13 @@
+@import '../../utils/colors.css';
+
+.footer {
+   display: flex;
+   justify-content: center;
+   border-top: 2px solid var(--grey-color);
+   padding: 2rem 0 1.5rem;
+}
+
+.footer_text {
+   margin: 0;
+   padding: 0;
+}
